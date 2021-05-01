@@ -27,7 +27,10 @@ See [here](http://yuandong-tian.com/elf-tutorial/tutorial.html).
 
 Install scripts
 ================
-You need to have ```cmake``` >= 3.8, ```gcc``` >= 4.9 and ```tbb``` (linux ```libtbb-dev```) in order to install this script successfully.
+以下基于WSL2环境，使用visual studio code编辑器，利用vcpkg管理c++包。
+
++ windows腾讯网安装 [安装visual studio code](https://dl.softmgr.qq.com/original/Development/VSCodeUserSetup-x64-1.55.2.exe)
++ wsl2 linux [安装cmake]()
 
 ```
 # 下载安装anaconda3

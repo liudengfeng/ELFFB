@@ -43,7 +43,7 @@ public:
     std::unique_ptr<CmdBase> clone() const override {
         auto res = std::unique_ptr<$classname>(new $classname(*this));
         // copy_to(*res);
-        # return std::move(res);
+        // return std::move(res);
         return res;
     }
     string PrintInfo() const override {

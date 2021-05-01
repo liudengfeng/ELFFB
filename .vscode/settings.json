@@ -1,7 +1,7 @@
 {
     "cmake.configureSettings": {
-        "CMAKE_TOOLCHAIN_FILE": "/home/ldf/src/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "/home/ldf/src/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "PYTHON_EXECUTABLE": "/home/ldf/anaconda3/envs/elf/bin/python"
     },
-    "python.pythonPath": "/home/ldf/anaconda3/envs/elf/bin/python",
     "cmake.sourceDirectory": "${workspaceFolder}/rts"
 }

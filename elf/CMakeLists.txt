@@ -10,10 +10,21 @@ endif()
 
 add_library(elf INTERFACE)
 target_sources(elf INTERFACE ${SOURCES})
-target_link_libraries(elf INTERFACE concurrentqueue tbb microtar)
+
+find_package(TBB CONFIG REQUIRED)
+find_package(unofficial-concurrentqueue CONFIG REQUIRED)
+
+target_link_libraries(elf INTERFACE 
+	unofficial::concurrentqueue::concurrentqueue 
+	TBB::tbb 
+	microtar
+)
 target_include_directories(elf
 	INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
-	)
+)
+
+set(USE_TBB ON)
+message(STATUS "使用TBB：${USE_TBB}")
 
 target_compile_definitions(elf INTERFACE USE_TBB)
 
