@@ -152,7 +152,8 @@ class Batch:
                 elif isinstance(v, (int, float)):
                     bk.fill_(v)
                 else:
-                    bk[:] = v
+                    # fix shape
+                    bk[:] = v.view(bk.size())
 
             else:
                 raise ValueError("Batch[%s]: \"%s\" in reply is missing in batch specification" % (batch_key, k))
