@@ -3,5 +3,12 @@
         "CMAKE_TOOLCHAIN_FILE": "/home/ldf/src/vcpkg/scripts/buildsystems/vcpkg.cmake",
         "PYTHON_EXECUTABLE": "/home/ldf/anaconda3/envs/elf/bin/python"
     },
-    "cmake.sourceDirectory": "${workspaceFolder}/rts"
+    "cmake.sourceDirectory": "${workspaceFolder}/rts",
+    "python.pythonPath": "/home/ldf/anaconda3/envs/elf/bin/python",
+    "python.testing.pytestArgs": [
+        "test_py"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
 }

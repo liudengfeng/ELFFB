@@ -20,16 +20,21 @@ if __name__ == '__main__':
 
     GC = env["game"].initialize()
 
+    print("游戏参数")
+    print(GC.params)
+    sys.exit(0)
+
     model = env["model_loaders"][0].load_model(GC.params)
     env["mi"].add_model("model", model, opt=True)
-    env["mi"].add_model("actor", model, copy=True, cuda=all_args.gpu is not None, gpu_id=all_args.gpu)
+    env["mi"].add_model("actor", model, copy=True,
+                        cuda=all_args.gpu is not None, gpu_id=all_args.gpu)
 
-    trainer.setup(sampler=env["sampler"], mi=env["mi"], rl_method=env["method"])
+    trainer.setup(sampler=env["sampler"],
+                  mi=env["mi"], rl_method=env["method"])
 
     GC.reg_callback("train", trainer.train)
     GC.reg_callback("actor", trainer.actor)
     runner.setup(GC, episode_summary=trainer.episode_summary,
-                episode_start=trainer.episode_start)
+                 episode_start=trainer.episode_start)
 
     runner.run()
-
