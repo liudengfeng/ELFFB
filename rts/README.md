@@ -13,7 +13,7 @@ A backend runs in the terminal and communicates with the front-end webpage to dr
 How to compile
 ============
 
-In directory `rts`, run the command: `mkdir build && cd build && cmake .. -DGAME_DIR=../game_MC && make`
+In directory `rts`, run the command(根据安装路径进行相应修改): `mkdir build && cd build && cmake .. -DGAME_DIR=../game_MC -DCMAKE_TOOLCHAIN_FILE=/home/ldf/src/vcpkg/scripts/buildsystems/vcpkg.cmake -DPYTHON_EXECUTABLE=/home/ldf/anaconda3/envs/elf/bin/python && make`
 
 To select the Python installation to compile with, use cmake flags `-DPYTHON_EXECUTABLE=/path/to/your/python`
 
