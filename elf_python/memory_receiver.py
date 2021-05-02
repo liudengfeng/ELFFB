@@ -175,9 +175,9 @@ class SeqStats:
                 if int(seq_num) < limit:
                     bin_idx = i
                     break
-            if seq_num > self.max_seq:
+            if seq_num.item() > self.max_seq:
                 self.max_seq = seq_num
-            if seq_num < self.min_seq:
+            if seq_num.item() < self.min_seq:
                 self.min_seq = seq_num
 
             name = "[" + str(self.limits[bin_idx]) + ", " + str(self.limits[bin_idx + 1]) + ")"

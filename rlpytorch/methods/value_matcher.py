@@ -38,13 +38,14 @@ class ValueMatcher:
         ''' Register the backward hook. Clip the gradient if necessary.'''
         grad_clip_norm = getattr(self.args, "grad_clip_norm", None)
         if grad_clip_norm:
-            def bw_hook(grad_in):
-                grad = grad_in.clone()
-                if grad_clip_norm is not None:
-                    average_norm_clip(grad, grad_clip_norm)
-                return grad
+            torch.nn.utils.clip_grad_norm_(self.args, grad_clip_norm)
+            # def bw_hook(grad_in):
+            #     grad = grad_in.clone()
+            #     if grad_clip_norm is not None:
+            #         average_norm_clip(grad, grad_clip_norm)
+            #     return grad
 
-            v.register_hook(bw_hook)
+            # v.register_hook(bw_hook)
 
     def feed(self, batch, stats):
         '''
