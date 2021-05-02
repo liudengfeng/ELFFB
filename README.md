@@ -30,7 +30,8 @@ Install scripts
 以下基于WSL2环境，使用visual studio code编辑器，利用vcpkg管理c++包。
 
 + windows腾讯网安装 [安装visual studio code](https://dl.softmgr.qq.com/original/Development/VSCodeUserSetup-x64-1.55.2.exe)
-+ wsl2 linux [安装cmake]()
++ wsl2 linux [安装cmake](https://apt.kitware.com/)
++ git clone 提速，安装[gh](https://github.com/cli/cli/releases/download/v1.9.2/gh_1.9.2_windows_amd64.msi)
 
 ```
 # 下载安装anaconda3
@@ -226,6 +227,22 @@ python3 eval.py
     --gpu 0                         # Use GPU 0 as the evaluation gpu.
     --additional_labels id          # Tell the game environment to output additional dict entries.
     --greedy                        # Use greedy policy to evaluate your model. If not specified, then it will sample from the action distributions. 
+```
+
+样本
+```
+game=./rts/game_MC/game model=actor_critic model_file=./rts/game_MC/model \ 
+python3 eval.py \
+--load model-winrate-80.0-357800.bin \
+--batchsize 128 \
+--players "fs=50,type=AI_NN;fs=20,type=AI_SIMPLE" \
+--num_games 1024 \
+--num_eval 10000 \
+--tqdm \
+--gpu 0 \
+--additional_labels id \
+--greedy \
+--trainer_stats winrate 
 ```
 
 Here is an example output (it takes 1 min 40 seconds to evaluate 10k games with 12 CPUs):
