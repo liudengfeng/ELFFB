@@ -9,6 +9,10 @@ Training
 ```
 sh ./train_df.sh --gpu [your gpu] --no_leaky_relu --list_file [your list of .sgf files]
 ```
+样本
+```
+sh ./train_df.sh --gpu 0 --no_leaky_relu --list_file go/sample1.sgf
+```
 Training with a single GPU. On GoGoD, Top 1 is around 51.2% after 8 days. Test performance is around 1% lower. 
 ```
 1214:loss0[5000]: avg: 1.71844, min: 1.22093[1926], max: 2.31351[1187]
@@ -25,6 +29,11 @@ Run the same command but without backpropagation.
 sh ./train_df.sh --gpu [your gpu] --load [your model] --multipred_no_backprop
 ```
 
+样本
+
+```
+sh ./train_df.sh --gpu 0 --load model-winrate-80.0-357800.bin --multipred_no_backprop
+```
 Interactive console   
 ======================
 You can play against the trained model. Rank is not established. 

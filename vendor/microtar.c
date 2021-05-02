@@ -152,7 +152,8 @@ const char* mtar_strerror(int err) {
   return "unknown error";
 }
 
-
+// TODO:寻找合适工具
+// https://techoverflow.net/2013/03/29/reading-tar-files-in-c/
 static int file_write(mtar_t *tar, const void *data, unsigned size) {
   unsigned res = fwrite(data, 1, size, tar->stream);
   return (res == size) ? MTAR_ESUCCESS : MTAR_EWRITEFAIL;

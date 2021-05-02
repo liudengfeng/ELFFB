@@ -333,7 +333,7 @@ class GCWrapper:
             raise ValueError("info.gid[%d] is not in callback functions" % infos.gid)
 
         if self._cb[infos.gid] is None:
-            return;
+            return
 
         batchsize = len(infos.s)
 

@@ -11,6 +11,7 @@
 #include <memory>
 #include <mutex>
 #include <cassert>
+#include <functional>
 
 template <typename Key, typename Record>
 class SharedReplayBuffer {

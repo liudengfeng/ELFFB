@@ -9,6 +9,7 @@
 #include "sgf.h"
 #include <fstream>
 #include <sstream>
+#include <functional>
 
 using namespace std;
 
