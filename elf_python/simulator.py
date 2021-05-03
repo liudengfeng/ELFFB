@@ -9,6 +9,7 @@ import abc
 import torch.multiprocessing as _mp
 mp = _mp.get_context('spawn')
 
+
 class Simulator(mp.Process):
     '''
     Wrapper for simulator.
@@ -19,6 +20,7 @@ class Simulator(mp.Process):
         get_key: from the key, get the content. e.g. ``get_key("s")`` will give the encoded state of the game.
         set_key: set the key from replies. e.g., ``set_key("a", 2)`` set the action to be 2 (and the underlying game can continue).
     '''
+
     def __init__(self, id, desc):
         '''
         Example:
@@ -60,7 +62,7 @@ class Simulator(mp.Process):
 
     def run(self):
         '''Return reward'''
-        self.chs = { }
+        self.chs = {}
         for key, v in self.desc.items():
             self.chs[key] = InitSender(v["connector"], self.id)
 
@@ -72,17 +74,18 @@ class Simulator(mp.Process):
             send_chs = {}
             reply_chs = {}
             reply_format = {}
-            data = { }
+            data = {}
             for name, v in self.desc.items():
                 # Collector and send data.
-                data_to_send = { k : self.get_key(k) for k, _ in v["input"].items() }
+                data_to_send = {k: self.get_key(k)
+                                for k, _ in v["input"].items()}
                 data_to_send.update({
-                    "_agent_name" : self.agent_name,
-                    "_game_counter" : self.game_counter,
-                    "_seq" : self.seq
+                    "_agent_name": self.agent_name,
+                    "_game_counter": self.game_counter,
+                    "_seq": self.seq
                 })
                 # A batch of size 1
-                data[name] = [ data_to_send ]
+                data[name] = [data_to_send]
                 send_chs[name] = self.chs[name]
 
                 if v["reply"] is not None:
@@ -111,4 +114,3 @@ class Simulator(mp.Process):
                 self.restart()
             else:
                 self.seq += 1
-

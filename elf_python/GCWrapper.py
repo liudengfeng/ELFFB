@@ -10,6 +10,7 @@ from .memory_receiver import MemoryReceiver
 from .zmq_adapter import InitConnector
 from queue import Queue
 
+
 class Collector:
     def __init__(self, name, collector_name, batchsize, T, batch_queue):
         self.receiver = InitConnector(collector_name)
@@ -21,19 +22,23 @@ class Collector:
         # XXX Not a good design to put replier into memory_receiver.
         # For now let it go.
         self.memory_receiver = \
-            MemoryReceiver(name, self.receiver, self.assembler, batch_queue, allow_incomplete_batch=False, replier=self.replier)
+            MemoryReceiver(name, self.receiver, self.assembler, batch_queue,
+                           allow_incomplete_batch=False, replier=self.replier)
+
 
 class GCWrapper:
     def __init__(self, simulator_class, desc, num_games, batchsize, T):
         self.desc = desc
         self.batch_q = Queue()
-        self.collectors = [ Collector(key, v["connector"], batchsize, T, self.batch_q) for key, v in self.desc.items() ]
+        self.collectors = [Collector(
+            key, v["connector"], batchsize, T, self.batch_q) for key, v in self.desc.items()]
 
-        self.simulators = [ simulator_class(str(i), desc) for i in range(num_games) ]
+        self.simulators = [simulator_class(
+            str(i), desc) for i in range(num_games)]
         for simulator in self.simulators:
             simulator.start()
 
-        self._cb = { }
+        self._cb = {}
 
     def reg_callback(self, key, callback):
         self._cb[key] = callback
@@ -46,4 +51,3 @@ class GCWrapper:
             reply = self._cb[rv.name](batch["cpu"], batch["gpu"])
 
         rv.Step(batch, reply)
-
